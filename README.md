@@ -18,7 +18,7 @@ Here's an example of an image generated using Pixa:
 - **Seed:** 42  
 
 Result:  
-![Example Image](https://via.placeholder.com/1280x720.png?text=Your+Generated+Image)  
+![Example Image](sample.jpg)  
 
 ---
 
