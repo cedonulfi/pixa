@@ -20,7 +20,7 @@
         $seed = intval($_POST['seed']);
 
         // Construct the API URL
-        $apiUrl = "https://image.pollinations.ai/prompt/{$prompt}?width={$width}&height={$height}&seed={$seed}";
+        $apiUrl = "https://image.pollinations.ai/prompt/{$prompt}?width={$width}&height={$height}&seed={$seed}&nologo=poll";
 
         // Initialize cURL session
         $ch = curl_init();
