@@ -12,13 +12,13 @@ Pixa is a simple AI-powered image generator using [Pollinations AI](https://poll
 ## Demo  
 Here's an example of an image generated using Pixa:  
 
-**Prompt:** _"A serene mountain landscape during sunrise"_  
+**Prompt:** _"A magnificent treehouse nestled in a giant, ancient tree, with cascading waterfalls and glowing lanterns illuminating the branches at dusk, surrounded by a lush, enchanted forest"_  
 - **Width:** 1280  
 - **Height:** 720  
-- **Seed:** 42  
+- **Seed:** 13  
 
 Result:  
-![Example Image](sample.jpg)  
+![Example Image](pixa.png)  
 
 ---
 
