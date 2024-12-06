@@ -29,15 +29,6 @@ if (curl_errno($ch)) {
 
 curl_close($ch);
 
-// Analyze the AI response to determine if it's a bad word or safe
-$isBadWord = analyzeResponse($response);
-
-// Display the result
-if ($isBadWord) {
-    echo "The input contains bad words or inappropriate content.";
-} else {
-    echo "The input is safe and does not contain bad words.";
-}
 
 /**
  * Function to analyze the AI response and check for bad words
@@ -46,7 +37,7 @@ if ($isBadWord) {
  */
 function analyzeResponse($response)
 {
-    // Check if the AI response contains the word "Unauthorized"
+    // Check if the AI response contains the word "Unauthorized prompt"
     if (stripos($response, "Unauthorized") !== false) {
         return true; // Bad word found in the response
     }
