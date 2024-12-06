@@ -38,7 +38,7 @@ curl_close($ch);
 function analyzeResponse($response)
 {
     // Check if the AI response contains the word "Unauthorized prompt"
-    if (stripos($response, "Unauthorized") !== false) {
+    if (stripos($response, "Unauthorized prompt") !== false) {
         return true; // Bad word found in the response
     }
 
