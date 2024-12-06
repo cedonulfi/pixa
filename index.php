@@ -14,35 +14,48 @@
     // Check if the form was submitted
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get form inputs
-        $prompt = urlencode($_POST['prompt']);
+        $prompt = $_POST['prompt'];
         $width = intval($_POST['width']);
         $height = intval($_POST['height']);
         $seed = intval($_POST['seed']);
 
-        // Construct the API URL
-        $apiUrl = "https://image.pollinations.ai/prompt/{$prompt}?width={$width}&height={$height}&seed={$seed}&nologo=poll";
-
-        // Initialize cURL session
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $apiUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        // Execute the API call
-        $imageData = curl_exec($ch);
-
-        // Check for errors
-        if (curl_errno($ch)) {
-            echo "<p>Error: " . curl_error($ch) . "</p>";
+        include"filter.php";
+        // Analyze the AI response to determine if it's a bad word or safe
+        $isBadWord = analyzeResponse($response);
+        
+        // Display the result
+        if ($isBadWord) {
+            echo "<p>The input contains bad words or inappropriate content.</p>";
         } else {
-            // Display the image if successful
-            echo "<div class='image-result'>";
-            echo "<h2>Generated Image:</h2>";
-            echo "<img src='data:image/png;base64," . base64_encode($imageData) . "' alt='Generated Image'>";
-            echo "</div>";
+            // echo "The input is safe and does not contain bad words.";
+            $prompt = urlencode($prompt);
+          
+            // Construct the API URL
+            $apiUrl = "https://image.pollinations.ai/prompt/{$prompt}?width={$width}&height={$height}&seed={$seed}&nologo=poll";
+    
+            // Initialize cURL session
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $apiUrl);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+            // Execute the API call
+            $imageData = curl_exec($ch);
+    
+            // Check for errors
+            if (curl_errno($ch)) {
+                echo "<p>Error: " . curl_error($ch) . "</p>";
+            } else {
+                // Display the image if successful
+                echo "<div class='image-result'>";
+                echo "<h2>Generated Image:</h2>";
+                echo "<img src='data:image/png;base64," . base64_encode($imageData) . "' alt='Generated Image'>";
+                echo "</div>";
+            }
+    
+            // Close the cURL session
+            curl_close($ch);
+          
         }
-
-        // Close the cURL session
-        curl_close($ch);
     }
     ?>
 
